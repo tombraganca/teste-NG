@@ -12,4 +12,4 @@ O projeto foi feito com as tecnologias typescript, postgresql e docker.
 
 Toda a estrutura e objetivos do projeto foi baseado no teste da empresa NG Cash disponível em https://ngcash.notion.site/Processo-Seletivo-NG-TRYBE-223de32e1ed047f2aa90cc0da84754ee.
 
-Foi preparado uma interface simples e de facil entendimento utilizando o figma disponível em  
+Foi preparado uma interface simples e de facil entendimento utilizando o figma disponível em  https://www.figma.com/file/0SrCe88vSXFjoUojvSa01b/Ng-cash?node-id=0%3A1&t=8lmnK8zWVMoe2akq-0
