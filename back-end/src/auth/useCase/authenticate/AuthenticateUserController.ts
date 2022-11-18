@@ -8,9 +8,9 @@ export class AuthenticateUserController {
         const { email, password } = request.body;
 
         try {
-            const token = await this.authenticateUserUseCase.execute({ email, password });
+            const userAuth = await this.authenticateUserUseCase.execute({ email, password });
 
-            return response.json({ token });
+            return response.json({ userAuth });
         } catch (err: any) {
             return response.status(400).json({
                 message: err.message || 'Unexpected error.'

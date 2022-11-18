@@ -1,13 +1,13 @@
-import { TokenTestProvider } from "../../test/providers-test/TokenTestProvider";
-import { InMemoryUserRepository } from "../../test/repositories-test/InMemoryUserRepository";
+import { JWTProvider } from "../../../providers/implementations/JWTProvider";
+import { PostgresUsersProvider } from "../../repositories/implementations/PostgresUserRepository";
 import { AuthenticateUserController } from "./AuthenticateUserController";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 
 
-const userRepository = new InMemoryUserRepository();
-const tokenTestProvider = new TokenTestProvider();
+const userRepository = new PostgresUsersProvider();
+const tokenProvider = new JWTProvider();
 
-const authenticateUser = new AuthenticateUserUseCase(userRepository, tokenTestProvider);
+const authenticateUser = new AuthenticateUserUseCase(userRepository, tokenProvider);
 
 const authenticateController = new AuthenticateUserController(authenticateUser);
 

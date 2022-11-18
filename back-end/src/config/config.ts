@@ -1,8 +1,12 @@
-export const config = {
-    MAIL_HOST: 'smtp.mailtrap.io',
-    MAIL_PORT: 2525,
-    MAIL_USER: '248253e2ed7da9',
-    MAIL_PASS: '72696c6300e2de',
+import * as dotenv from 'dotenv'
 
-    JWT_SECRET: '964469eb7423f7afb0be298b0e21c940'
+dotenv.config();
+
+export const config = {
+    MAIL_HOST: process.env.MAIL_HOST || 'your.smtp.host',
+    MAIL_PORT: process.env.MAIL_PORT || '2525',
+    MAIL_USER: process.env.MAIL_USER || 'your email',
+    MAIL_PASS: process.env.MAIL_PASS || 'your pass',
+
+    JWT_SECRET: process.env.JWT_SECRET || 'default',
 }

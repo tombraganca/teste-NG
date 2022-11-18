@@ -7,7 +7,7 @@ export class PostgresUsersProvider implements IUserRepository {
 
     constructor() {
         this.connection = new PrismaClient({
-            log: ['query', 'info', 'warn']
+            log: ['info']
         });
     }
 

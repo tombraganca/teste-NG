@@ -9,7 +9,7 @@ app.use('/auth', authRouter);
 
 const port: number = 3000;
 
-app.get("/", (_req, res: Response) => {
+app.get("/", (_req: Request, res: Response) => {
     res.send(`Server is running on port: ${port}`);
 });
 
