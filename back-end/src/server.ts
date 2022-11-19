@@ -1,20 +1,22 @@
+import 'express-async-error';
 import express, { Application, Request, Response } from 'express';
-import { authRouter } from './auth/routes';
+import { config } from './config/config';
+
+import { router } from './routes';
 
 const app: Application = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/auth', authRouter);
-
-const port: number = 3000;
-
-app.get("/", (_req: Request, res: Response) => {
-    res.send(`Server is running on port: ${port}`);
+app.use(router);
+app.use((err: Error, req: Request, res: Response) => {
+    return res.status(500).json({ message: err.message });
 });
 
+app.get("/", (_req: Request, res: Response) => {
+    res.send(`Server is running on port: ${config.PORT}`);
+});
 
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
-}
-);
+app.listen(config.PORT, () => {
+    console.log(`Server is running on port: ${config.PORT}`);
+});

@@ -1,8 +1,8 @@
 
-import { User } from "../../../entities/User";
-import { IMailProvider } from "../../../providers/IMailProvider";
-import { TEMPLATE_EMAIL } from "../../../providers/configs/TempleteEmail";
-import { IUserRepository } from "../../repositories/IUserReposotory";
+import { User } from "../../entities/User";
+import { IMailProvider } from "../../providers/IMailProvider";
+import { TEMPLATE_EMAIL } from "../../providers/configs/TempleteEmail";
+import { IUserRepository } from "../../repositories/IUserRepository";
 import { CreateUserRequestDTO } from "./CreateUserDTO";
 
 export class CreateUserUseCase {

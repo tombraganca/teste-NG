@@ -1,6 +1,6 @@
 
 import { InMemoryUserRepository } from "../../test/repositories-test/InMemoryUserRepository";
-import { User } from "../../../entities/User";
+import { User } from "../../entities/User";
 import { it, describe, expect } from "vitest";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 import { MailTestProvider } from "../../test/providers-test/MailTestProvider";
@@ -26,7 +26,6 @@ describe("CreateUserUseCase", () => {
         });
 
         const userCreated = await inMemoryUserRepository.findByEmail(user.email);
-        console.log(user, userCreated);
 
         expect(userCreated).toBeInstanceOf(User);
     });

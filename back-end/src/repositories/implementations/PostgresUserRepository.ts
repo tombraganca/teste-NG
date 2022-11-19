@@ -1,14 +1,12 @@
-import { prisma, PrismaClient } from "@prisma/client";
-import { User } from "../../../entities/User";
-import { IUserRepository } from "../IUserReposotory";
+import { PrismaClient } from "@prisma/client";
+import { User } from "../../entities/User";
+import { IUserRepository } from "../IUserRepository";
 
 export class PostgresUsersProvider implements IUserRepository {
     private connection: PrismaClient;
 
     constructor() {
-        this.connection = new PrismaClient({
-            log: ['info']
-        });
+        this.connection = new PrismaClient();
     }
 
 

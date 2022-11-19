@@ -2,7 +2,7 @@ export interface ITokenPayload {
     id: string;
 }
 
-export interface ITokenProvider {
+export interface IGenerateTokenProvider {
     generateToken(payload: ITokenPayload): Promise<string>;
     //verifyToken(token: string): Promise<ITokenPayload>;
 }
