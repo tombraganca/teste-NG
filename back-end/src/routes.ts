@@ -11,6 +11,7 @@ router.post("/register", (request, response) => {
 });
 
 router.post("/login", (request, response) => {
+    console.log('login');
     return authenticateController.handle(request, response);
 });
 

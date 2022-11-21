@@ -1,15 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import './index.css';
+import { AuthProvider } from "./Context/AuthContext";
+import { Routes } from './Routes/Routes'
 
-function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <div className="App">
-      Home
-    </div>
-  )
+export function App() {
+
+    return (
+        <AuthProvider>
+            <Routes />
+        </AuthProvider>
+    );
 }
-
-export default App
