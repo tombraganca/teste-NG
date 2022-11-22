@@ -19,3 +19,7 @@ export async function login(props: { email: string, password: string }) {
 export async function createUser(props: { name: string, email: string, password: string }) {
     return await axiosInstance.post(`register`, props);
 }
+
+export async function refreshToken(props: { refreshToken: string }) {
+    return await axiosInstance.post(`refresh-token`, props);
+}

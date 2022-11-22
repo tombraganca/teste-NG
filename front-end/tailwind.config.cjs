@@ -7,11 +7,12 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      'sans': ['Inter','sans-serif'],
+      'sans': ['Inter', 'sans-serif'],
     },
     extend: {
       backgroundImage: {
-        capa: "url('/logo-capa.png')"
+        capa: "url('/logo-capa.png')",
+        network: "url('src/assets/images/network.png')",
       }
     },
   },

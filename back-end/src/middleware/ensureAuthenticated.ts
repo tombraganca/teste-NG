@@ -12,7 +12,7 @@ export function ensureAuthenticated(request: Request, response: Response, next: 
         });
     }
 
-    if(/^Bearer$/i.test(authToken)) {
+    if (/^Bearer$/i.test(authToken)) {
         return response.status(401).json({
             message: "Token malformatted"
         });

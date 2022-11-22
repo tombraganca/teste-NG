@@ -4,6 +4,7 @@ import cors from 'cors'
 import { config } from './config/config';
 
 import { router } from './routes';
+import { PrismaClient } from '@prisma/client';
 
 const app: Application = express();
 
@@ -13,10 +14,6 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(router);
-
-app.use((err: Error, req: Request, res: Response) => {
-    return res.status(500).json({ message: err.message });
-});
 
 app.get("/", (_req: Request, res: Response) => {
     res.send(`Server is running on port: ${config.PORT}`);

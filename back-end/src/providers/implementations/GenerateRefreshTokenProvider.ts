@@ -13,7 +13,7 @@ export class GenerateRefreshTokenProvider implements IGenerateRefreshTokenProvid
     async execute(refreshToken: RefreshToken): Promise<void> {
 
         if (!refreshToken.expiresIn) {
-            refreshToken.expiresIn = dayjs().add(Number(config.REFRESH_TOKEN), 'day').unix();
+            refreshToken.expiresIn = dayjs().add(Number(config.REFRESH_TOKEN), 'second').unix();
         }
 
         await this.connection.refreshToken.create({
