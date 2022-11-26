@@ -7,9 +7,6 @@ export class AuthenticateUserController {
     async handle(request: Request, response: Response): Promise<Response> {
         const { email, password } = request.body;
 
-        console.log('email', email);
-        console.log('password', password);
-
         try {
             const userAuth = await this.authenticateUserUseCase.execute({ email, password });
 

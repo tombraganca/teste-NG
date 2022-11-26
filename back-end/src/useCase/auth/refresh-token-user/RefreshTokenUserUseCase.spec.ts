@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
 import { describe, expect, it } from "vitest";
-import { GenerateRefreshTokenProvider } from "../../providers/implementations/GenerateRefreshTokenProvider";
-import { GenerateTokenProvider } from "../../providers/implementations/GenerateTokenProvider";
-import { InMemoryRefreshTokenRepository } from "../../test/repositories-test/InMemoryRefreshTokenRepository";
+import { GenerateRefreshTokenProvider } from "../../../providers/implementations/GenerateRefreshTokenProvider";
+import { GenerateTokenProvider } from "../../../providers/implementations/GenerateTokenProvider";
+import { InMemoryRefreshTokenRepository } from "../../../test/repositories-test/InMemoryRefreshTokenRepository";
 import { RefreshTokenUserUseCase } from "./RefreshTokenUserUseCase";
 
 describe("RefreshTokenUserUseCase", () => {

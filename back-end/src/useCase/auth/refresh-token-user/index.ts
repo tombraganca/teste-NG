@@ -1,6 +1,6 @@
-import { GenerateRefreshTokenProvider } from "../../providers/implementations/GenerateRefreshTokenProvider";
-import { GenerateTokenProvider } from "../../providers/implementations/GenerateTokenProvider";
-import { PostgresRefreshTokenRepository } from "../../repositories/implementations/PostrgresRefreshTokenRepository";
+import { GenerateRefreshTokenProvider } from "../../../providers/implementations/GenerateRefreshTokenProvider";
+import { GenerateTokenProvider } from "../../../providers/implementations/GenerateTokenProvider";
+import { PostgresRefreshTokenRepository } from "../../../repositories/implementations/PostgresRefreshTokenRepository";
 import { RefreshTokenUserController } from "./RefreshTokenUserController";
 import { RefreshTokenUserUseCase } from "./RefreshTokenUserUseCase";
 

@@ -1,11 +1,11 @@
 
-import { User } from "../../entities/User";
-import { IGenerateTokenProvider } from "../../providers/IGenerateTokenProvider";
-import { IUserRepository } from "../../repositories/IUserRepository";
+import { User } from "../../../entities/User";
+import { IGenerateTokenProvider } from "../../../providers/IGenerateTokenProvider";
+import { IUserRepository } from "../../../repositories/IUserRepository";
 import { CreateUserRequestDTO } from "./AuthenticateUserDTO";
-import { RefreshToken } from "../../entities/RefreshToken";
-import { IGenerateRefreshTokenProvider } from "../../providers/IGenerateRefreshTokenProvider";
-import { IRefreshTokenRepository } from "../../repositories/IRefreshTokenRepository";
+import { RefreshToken } from "../../../entities/RefreshToken";
+import { IGenerateRefreshTokenProvider } from "../../../providers/IGenerateRefreshTokenProvider";
+import { IRefreshTokenRepository } from "../../../repositories/IRefreshTokenRepository";
 
 export class AuthenticateUserUseCase {
     constructor(
@@ -36,11 +36,6 @@ export class AuthenticateUserUseCase {
 
         const refreshToken = new RefreshToken({ userId: user.id, expiresIn: 0 });
         await this.refreshTokenProvider.execute(refreshToken);
-
-
-
-
-
 
         return { user: { id: user.id, name: user.name, email: user.email }, token, refreshToken: refreshToken.id };
     }

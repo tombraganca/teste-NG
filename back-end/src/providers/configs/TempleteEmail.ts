@@ -1,3 +1,16 @@
+interface ITransactionTempleteDTO {
+  userSender: {
+    name: string;
+    email: string;
+  };
+  amount: number,
+  userReceived: {
+    name: string;
+    email: string;
+  };
+  details: string;
+}
+
 export const TEMPLATE_EMAIL = `<!doctype html>
 <html>
   <head>
@@ -18,3 +31,8 @@ export const TEMPLATE_EMAIL = `<!doctype html>
     </style>
   </body>
 </html>`;
+
+export const TEMPLATE_EMAIL_TRANSACTION = ({ userSender, amount, userReceived, details }: ITransactionTempleteDTO) => `<p>Olá, ${userSender.name}!</p>
+<p>Você acabou de realizar uma transferência no valor de R$${amount} para ${userReceived.name}.</p>
+<p>Detalhes: ${details}</p>
+<p>Att, Equipe do meu app.</p>`

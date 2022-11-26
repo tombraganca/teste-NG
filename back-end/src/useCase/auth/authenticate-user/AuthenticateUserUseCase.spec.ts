@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { GenerateRefreshTokenTestProvider } from "../../test/providers-test/GenerateRefreshTokenTestProvider";
-import { MailTestProvider } from "../../test/providers-test/MailTestProvider";
-import { TokenTestProvider } from "../../test/providers-test/TokenTestProvider";
-import { InMemoryRefreshTokenRepository } from "../../test/repositories-test/InMemoryRefreshTokenRepository";
-import { InMemoryUserRepository } from "../../test/repositories-test/InMemoryUserRepository";
+import { GenerateRefreshTokenTestProvider } from "../../../test/providers-test/GenerateRefreshTokenTestProvider";
+import { MailTestProvider } from "../../../test/providers-test/MailTestProvider";
+import { TokenTestProvider } from "../../../test/providers-test/TokenTestProvider";
+import { InMemoryAccountRepository } from "../../../test/repositories-test/InMemoryAccountRepository";
+import { InMemoryRefreshTokenRepository } from "../../../test/repositories-test/InMemoryRefreshTokenRepository";
+import { InMemoryUserRepository } from "../../../test/repositories-test/InMemoryUserRepository";
 import { CreateUserUseCase } from "../create-user/CreateUserUseCase";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 
@@ -12,7 +13,8 @@ describe("AuthenticateUserUseCase", () => {
     const inMemoryRefreshTokenRepository = new InMemoryRefreshTokenRepository();
     const mailProvider = new MailTestProvider();
     const tokenProvider = new TokenTestProvider();
-    const createUserUseCase = new CreateUserUseCase(inMemoryUserRepository, mailProvider);
+    const inMemoryAccountRepository = new InMemoryAccountRepository();
+    const createUserUseCase = new CreateUserUseCase(inMemoryUserRepository, inMemoryAccountRepository, mailProvider);
     const generateRefreshTokenProvider = new GenerateRefreshTokenTestProvider()
 
     const user = {
@@ -42,7 +44,7 @@ describe("AuthenticateUserUseCase", () => {
         const createUserRepository = new InMemoryUserRepository();
         const mailProvider = new MailTestProvider();
         const tokenProvider = new TokenTestProvider();
-        const createUserUseCase = new CreateUserUseCase(createUserRepository, mailProvider);
+        const createUserUseCase = new CreateUserUseCase(createUserRepository, inMemoryAccountRepository, mailProvider);
         const generateRefreshTokenProvider = new GenerateRefreshTokenTestProvider()
         await createUserUseCase.execute(user);
 
@@ -61,7 +63,8 @@ describe("AuthenticateUserUseCase", () => {
         const createUserRepository = new InMemoryUserRepository();
         const mailProvider = new MailTestProvider();
         const tokenProvider = new TokenTestProvider();
-        const createUserUseCase = new CreateUserUseCase(createUserRepository, mailProvider);
+        const inMemoryAccountRepository = new InMemoryAccountRepository();
+        const createUserUseCase = new CreateUserUseCase(createUserRepository, inMemoryAccountRepository, mailProvider);
         const generateRefreshTokenProvider = new GenerateRefreshTokenTestProvider()
         await createUserUseCase.execute(user);
 

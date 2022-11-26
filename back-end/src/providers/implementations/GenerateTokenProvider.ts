@@ -13,7 +13,7 @@ export class GenerateTokenProvider implements IGenerateTokenProvider {
 
     async generateToken(payload: ITokenPayload): Promise<string> {
         const token = jwt.sign(payload, this.secret, {
-            expiresIn: '20s'
+            expiresIn: config.TOKEN_TIME
         });
 
         return token;

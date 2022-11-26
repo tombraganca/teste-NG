@@ -1,14 +1,17 @@
 
-import { User } from "../../entities/User";
-import { IMailProvider } from "../../providers/IMailProvider";
-import { TEMPLATE_EMAIL } from "../../providers/configs/TempleteEmail";
-import { IUserRepository } from "../../repositories/IUserRepository";
+import { User } from "../../../entities/User";
+import { IMailProvider } from "../../../providers/IMailProvider";
+import { TEMPLATE_EMAIL } from "../../../providers/configs/TempleteEmail";
+import { IUserRepository } from "../../../repositories/IUserRepository";
 import { CreateUserRequestDTO } from "./CreateUserDTO";
+import { Account } from "../../../entities/Account";
+import { IAccountRepository } from "../../../repositories/IAccountRepository";
 
 export class CreateUserUseCase {
 
     constructor(
         private userRepository: IUserRepository,
+        private accountRepository: IAccountRepository,
         private mailProvider: IMailProvider
     ) { }
 
@@ -42,6 +45,14 @@ export class CreateUserUseCase {
             subject: 'Seja bem-vindo à plataforma',
             body: TEMPLATE_EMAIL
         });
+
+        const userAccount = new Account({
+            balance: 100,
+            userId: user.id
+        });
+
+        await this.accountRepository.save(userAccount);
+
     }
 
     private emailValidate(email: string): boolean {

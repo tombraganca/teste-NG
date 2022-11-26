@@ -11,5 +11,7 @@ export const config = {
     MAIL_PASS: process.env.MAIL_PASS || 'your pass',
 
     SECRET_KEY: process.env.SECRET_KEY || 'default',
-    REFRESH_TOKEN: process.env.REFRESH_TOKEN || 30
+    REFRESH_TOKEN_TIME: process.env.REFRESH_TOKEN_TIME || 1,
+    TOKEN_TIME: process.env.TOKEN_TIME || '15m'
+
 }

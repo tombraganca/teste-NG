@@ -1,8 +1,10 @@
 import { Router } from "express";
 import { ensureAuthenticated } from "./middleware/ensureAuthenticated";
-import { authenticateController } from "./useCase/authenticate-user";
-import { createUserController } from "./useCase/create-user";
-import { refreshTokenUserController } from "./useCase/refresh-token-use";
+import { authenticateController } from "./useCase/auth/authenticate-user";
+import { createUserController } from "./useCase/auth/create-user";
+import { findAccountController } from "./useCase/account/find-account-by-email";
+import { refreshTokenUserController } from "./useCase/auth/refresh-token-user";
+import { transferController } from "./useCase/transactions/do-a-transfer";
 
 const router = Router();
 
@@ -15,13 +17,21 @@ router.post("/login", (request, response) => {
 });
 
 router.post("/refresh-token", (request, response) => {
-    console.log(request.body);
     return refreshTokenUserController.handle(request, response);
+});
+
+router.get('/account', ensureAuthenticated, (request, response) => {
+    return findAccountController.handle(request, response);
+});
+
+router.post('/transfer', ensureAuthenticated, (request, response) => {
+    return transferController.handle(request, response);
 });
 
 router.get('/test', ensureAuthenticated, (request, response) => {
     return response.json({ message: "Hello World" })
-})
+});
+
 
 export { router };
 
