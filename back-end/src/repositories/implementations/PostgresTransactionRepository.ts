@@ -22,4 +22,19 @@ export class PostgresTransactionRepository implements ITransactionRepository {
             }
         });
     }
+
+    async listByAccountId(accountId: string): Promise<Transaction[]> {
+        return await this.connection.transaction.findMany({
+            where: {
+                OR: [
+                    {
+                        receivedAccountId: accountId
+                    },
+                    {
+                        senderAccountId: accountId
+                    }
+                ]
+            }
+        });
+    }
 }

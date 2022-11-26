@@ -13,4 +13,4 @@ const mailProvider = new MailTrapMailProvider()
 const transferUseCase = new TransferUseCase(accountRepository, userRepository, transactionRepository, mailProvider);
 const transferController = new TransferController(transferUseCase);
 
-export { transferController };
+export { transferController, transferUseCase };

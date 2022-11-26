@@ -72,7 +72,7 @@ export class TransferUseCase {
 
         await this.sendEmailTransaction(senderAccount, receivedAccount, transaction);
 
-        return transaction;
+        return { transaction, message: 'Transfer successfully completed' };
     }
 
     async updateAmounts(sender: Account, received: Account, amount: number) {
@@ -103,6 +103,21 @@ export class TransferUseCase {
                 sender.balance += amount;
                 await this.accountRepository.updateBalance(sender);
             }
+
+            const senderUser = await this.userRepository.findByUserId(sender.userId);
+
+            this.mailProvider.sendMail({
+                to: {
+                    name: senderUser?.name || '',
+                    email: senderUser?.email || ''
+                },
+                from: {
+                    name: 'Equipe do meu app',
+                    email: 'ngcash@test.com'
+                },
+                subject: 'Erro ao realizar transferência',
+                body: 'Ocorreu um erro ao realizar a transferência, tente novamente mais tarde.'
+            });
             throw new Error('Error while updating accounts.');
         }
     }

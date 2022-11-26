@@ -16,7 +16,6 @@ export class InMemoryAccountRepository implements IAccountRepository {
     }
 
     async findByUserId(userId: string): Promise<Account | null> {
-        console.log(this.accounts);
         const account = this.accounts.find(account => account.userId === userId);
 
         return account || null;

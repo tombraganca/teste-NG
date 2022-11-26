@@ -46,9 +46,7 @@ describe('TransferUseCase', async () => {
             senderAccountId: account2Created.id
         });
 
-        console.log(transfer);
-
-        expect(transfer).haveOwnProperty('id');
+        expect(transfer).toHaveProperty(['transaction', 'id']);
     });
 
     it('should not transfer money if sender account not exists', async () => {
@@ -112,10 +110,10 @@ describe('TransferUseCase', async () => {
             senderAccountId: account3Created.id
         });
 
-        const findAccountById = new FindAccountById(inMemoryAccountRepository);
+        const findAccountById = new FindAccountById(inMemoryAccountRepository, inMemoryUserRepository);
         const senderAccount = await findAccountById.execute({ accountId: account3Created.id });
 
-        expect(senderAccount?.balance).toBe(90);
+        expect(senderAccount?.account.balance).toBe(90);
     });
 
     it('should add the money of received account', async () => {
@@ -137,9 +135,9 @@ describe('TransferUseCase', async () => {
             senderAccountId: accountCreated.id
         });
 
-        const findAccountById = new FindAccountById(inMemoryAccountRepository);
+        const findAccountById = new FindAccountById(inMemoryAccountRepository, inMemoryUserRepository);
         const receivedAccount = await findAccountById.execute({ accountId: accountCreated.id });
 
-        expect(receivedAccount?.balance).toBe(110);
+        expect(receivedAccount?.account.balance).toBe(110);
     });
 })

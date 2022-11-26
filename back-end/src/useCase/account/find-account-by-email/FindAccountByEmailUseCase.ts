@@ -27,6 +27,6 @@ export class FindAccountByEmailUseCase {
             throw new Error('Account not found.');
         }
 
-        return account;
+        return { userId: account.userId, id: account.id, createdAt: account.createdAt, user };
     }
 }

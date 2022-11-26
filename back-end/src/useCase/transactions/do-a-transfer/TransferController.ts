@@ -8,17 +8,17 @@ export class TransferController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const { receivedAccountId, amount, details } = request.body;
-        const senderAccountId = request.headers.accountId as string;
+        const senderAccountId = request.headers.account_id as string;
 
         try {
-            await this.transferUseCase.execute({
+            const transfer = await this.transferUseCase.execute({
                 receivedAccountId,
                 amount,
                 details,
                 senderAccountId,
             });
 
-            return response.status(201).send();
+            return response.status(201).json(transfer);
         } catch (err: any) {
             return response.status(400).json({
                 message: err.message || 'Unexpected error.'

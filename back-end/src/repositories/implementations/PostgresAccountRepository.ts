@@ -20,36 +20,18 @@ export class PostgresAccountRepository implements IAccountRepository {
     }
 
     async findByUserId(userId: string): Promise<Account | null> {
-        const account = await this.connection.account.findFirst({
+        return await this.connection.account.findFirst({
             where: {
                 userId: userId
             }
         });
-
-        if (!account) {
-            return null;
-        }
-
-        return new Account({
-            balance: account.balance,
-            userId: account.userId
-        });
     }
 
     async findById(accountId: string): Promise<Account | null> {
-        const account = await this.connection.account.findFirst({
+        return await this.connection.account.findFirst({
             where: {
                 id: accountId
             }
-        });
-
-        if (!account) {
-            return null;
-        }
-
-        return new Account({
-            balance: account.balance,
-            userId: account.userId
         });
     }
 
