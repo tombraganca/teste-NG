@@ -1,17 +1,18 @@
-import { Notify } from "../../components/Notify";
-import { getTransactions } from "../../services/TransactionService";
+import { Transition, Dialog } from "@headlessui/react";
+import { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { NewTransaction } from "./components/new-transaction/indedx";
 
 export function Dashboard() {
+    const [showNewTransactionModal, setShowNewTransactionModal] = useState(false);
+    const navigate = useNavigate();
 
-    async function handleTest() {
-        try {
+    function closeModal() {
+        setShowNewTransactionModal(false)
+    }
 
-            const { data } = await getTransactions();
-            Notify({ message: data.message, type: 'success' });
-        } catch (error: any) {
-            console.log(error)
-            Notify({ message: error.response.data.message, type: 'error' });
-        }
+    function openModal() {
+        setShowNewTransactionModal(true)
     }
 
     return (
@@ -35,7 +36,7 @@ export function Dashboard() {
                     <div className="flex justify-between">
                         <button
                             className=" bg-zinc-800 px-8 py-4 mt-2 rounded-xl"
-                            onClick={handleTest}
+                            onClick={() => { openModal() }}
                         >
                             <span className="text-white">Transfer</span>
                         </button>
@@ -46,6 +47,40 @@ export function Dashboard() {
                 </section>
 
             </main>
+
+            <Transition appear show={showNewTransactionModal} as={Fragment}>
+                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-black bg-opacity-25" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 overflow-y-auto">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-zinc-800 p-6 text-left align-middle shadow-xl transition-all">
+                                    <NewTransaction />
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
+                    </div>
+                </Dialog>
+            </Transition>
         </>
     )
 }
