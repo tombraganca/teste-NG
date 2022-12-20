@@ -6,13 +6,14 @@
   "scripts": {
     "build": "tsc",
     "test": "vitest",
-    "dev": "tsnd --exit-child --inspect=4321 src/server.ts"
+    "dev": "tsnd --exit-child --inspect=4321 src/server.ts",
+    "dev:w": "tsnd --exit-child --respawn --watch src --inspect=4321 src/server.ts"
   },
   "keywords": [],
   "author": "Tom Santos",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^4.6.1",
+    "@prisma/client": "^4.7.1",
     "@types/nodemailer": "^6.4.6",
     "@types/uuid": "^8.3.4",
     "bcrypt": "^5.1.0",
@@ -37,7 +38,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.5.1",
     "eslint-plugin-promise": "^6.1.1",
-    "prisma": "^4.6.1",
+    "prisma": "^4.7.0",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.9.3",

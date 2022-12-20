@@ -55,4 +55,24 @@ describe("FindAccountByEmailUseCase", async () => {
         }
 
     });
+
+    it('should return account and user if email is equal to authUser', async () => {
+
+        const findAccount = new FindAccountByEmailUseCase(inMemoryAccountRepository, inMemoryUserRepository);
+
+        const userCreated = await inMemoryUserRepository.findByEmail(user.email);
+
+        const account = await findAccount.execute({ email: user.email, authUserId: userCreated.id });
+
+        expect(account).toHaveProperty('balance');
+    });
+
+    it('should return account and user if email is not equal to authUser', async () => {
+
+        const findAccount = new FindAccountByEmailUseCase(inMemoryAccountRepository, inMemoryUserRepository);
+
+        const account = await findAccount.execute({ email: user.email, authUserId: "email2" });
+
+        expect(account).not.toHaveProperty('account.balance');
+    });
 });

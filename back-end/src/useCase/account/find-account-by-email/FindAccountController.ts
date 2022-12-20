@@ -6,10 +6,10 @@ export class FindAccountController {
 
     async handle(request: Request, response: Response) {
 
-        const { email } = request.body;
+        const email = request.query.email as string;
 
         try {
-            const account = await this.findAccountByEmailUseCase.execute({ email });
+            const account = await this.findAccountByEmailUseCase.execute({ email});
             return response.json(account);
 
         } catch (err: any) {

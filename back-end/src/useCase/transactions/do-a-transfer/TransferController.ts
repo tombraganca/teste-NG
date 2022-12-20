@@ -7,8 +7,9 @@ export class TransferController {
     ) { }
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { receivedAccountId, amount, details } = request.body;
-        const senderAccountId = request.headers.account_id as string;
+        const { receivedAccountId, amount, details, senderAccountId } = request.body;
+
+        console.log(request.body);
 
         try {
             const transfer = await this.transferUseCase.execute({

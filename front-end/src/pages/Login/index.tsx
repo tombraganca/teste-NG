@@ -60,10 +60,10 @@ export function Login() {
             <div className='flex justify-around content-center flex-col flex-auto'>
                 <div className="flex items-center justify-center min-h-screen bg-zinc-900">
                     <div className="px-8 py-6 mt-4 text-left bg-zinc-800 rounded-xl shadow-lg">
-                        <h3 className="text-2xl font-bold text-center text-white">Bem vindo ao NG Cash</h3>
+                        <h3 className="text-2xl font-bold text-center text-white">Welcome to NG Cash</h3>
 
                         <dd className="text-zinc-400 text-center pt-1">
-                            Faça Login para continuar
+                            Login to continue
                         </dd>
                         <div className="flex justify-center content-center flex-col" >
                             <div className="mt-4">
@@ -81,7 +81,7 @@ export function Login() {
                                     <label className="block text-white">Password</label>
                                     <div className="relative">
                                         <input
-                                            type={showPassword ? 'password' : 'text'}
+                                            type={showPassword ? 'text' : 'password'}
                                             placeholder="Password"
                                             value={password}
                                             onChange={e => setPassword(e.target.value)}
@@ -105,7 +105,7 @@ export function Login() {
                                         onClick={handleSubmit}
                                         disabled={isLoading || !email || !password}>
                                         {
-                                            isLoading ? 'Carregando...' : 'Entrar'
+                                            isLoading ? 'Loading...' : 'Login'
                                         }
                                     </button>
                                 </div>
@@ -113,13 +113,46 @@ export function Login() {
                                 <button
                                     onClick={openModal}
                                     className="text-sm text-zinc-200 hover:underline">
-                                    Ainda não tem uma conta? Cadastre-se
+                                    Not have an account yet? Register
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <Transition appear show={showCreateAccountModal} as={Fragment}>
+                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-black bg-opacity-25" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 overflow-y-auto">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-zinc-800 p-6 text-left align-middle shadow-xl transition-all">
+                                    <CreateAccountModal />
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
+                    </div>
+                </Dialog>
+            </Transition>
         </section>
     )
 }

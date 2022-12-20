@@ -68,6 +68,9 @@ export class TransferUseCase {
         });
 
         await this.updateAmounts(senderAccount, receivedAccount, amount);
+
+
+
         await this.transactionRepository.save(transaction);
 
         await this.sendEmailTransaction(senderAccount, receivedAccount, transaction);

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { redirect } from "react-router-dom";
 import environment from '../../environment.dev.json'
 
 const axiosInstance = axios.create({

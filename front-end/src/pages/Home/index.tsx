@@ -1,10 +1,11 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 
 import { Notify } from '../../components/Notify';
 import { Context } from '../../Context/AuthContext';
 import logoImg from '../../assets/svg/logo.svg';
+import { findAccountByEmail } from '../../services/AccountService';
 
 
 
@@ -12,7 +13,7 @@ export function Home() {
 
     const [showMenu, setShowMenu] = React.useState(false);
     const navigate = useNavigate();
-    const { handleLogout } = useContext(Context);
+    const { handleLogout, userAccount, setUserAccount } = useContext(Context);
 
     async function handleSignOut() {
         try {
@@ -32,7 +33,6 @@ export function Home() {
         <main>
             <nav className='bg-black p-4 h-20 flex items-center justify-between'>
                 <div>
-
                     <Link to='/'>
                         <img src={logoImg} alt="" className='h-12' />
                     </Link>

@@ -13,7 +13,7 @@ module.exports = {
       backgroundImage: {
         capa: "url('/logo-capa.png')",
         network: "url('src/assets/images/network.png')",
-      }
+      },
     },
   },
   plugins: [],

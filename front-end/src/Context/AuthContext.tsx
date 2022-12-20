@@ -1,11 +1,14 @@
 import { createContext, useState, useEffect } from "react";
 import { redirect } from "react-router-dom";
 import Loading from "../components/Loading";
+import { Account } from "../entities/Account";
 
 import { login } from "../services/AuthService";
 import axiosInstance from "../services/AxiosInstance";
 interface IContext {
     authenticated: boolean;
+    userAccount: Account;
+    setUserAccount: (account: Account) => void;
     handleLogin: (props: { email: string; password: string }) => Promise<void>;
     handleLogout: () => void;
 }
@@ -16,31 +19,46 @@ function AuthProvider({ children }: any) {
 
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [userAccount, setUserAccount] = useState({} as Account);
 
     useEffect(() => {
 
-        const token = localStorage.getItem("token");
+        try {
 
-        if (token) {
-            axiosInstance.defaults.headers.Authorization = `Bearer ${token}`;
-            setAuthenticated(true);
+            const token = localStorage.getItem("token");
+            const user = JSON.parse(localStorage.getItem("user") || "");
+            setUserAccount(user);
+
+            if (token) {
+                axiosInstance.defaults.headers.Authorization = `Bearer ${token}`;
+                setAuthenticated(true);
+            }
+        } catch (error) {
+            console.warn(error);
+        } finally {
+            setLoading(false);
         }
 
-        setLoading(false);
     }, []);
 
     async function handleLogin(props: { email: string; password: string }) {
         try {
             const { data } = await login(props);
             localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.user));
+            setUserAccount(data.user);
             localStorage.setItem("refreshToken", data.refreshToken);
             axiosInstance.defaults.headers.Authorization = `Bearer ${data.token}`;
+
+
+
             redirect("/home");
             setAuthenticated(true);
 
         } catch (error: any) {
-            return Promise.reject(error.response.data);
+            if (error.response.data)
+                return Promise.reject(error.response.data);
+
+            return Promise.reject(error);
         }
     }
 
@@ -60,7 +78,7 @@ function AuthProvider({ children }: any) {
     }
 
     return (
-        <Context.Provider value={{ authenticated, handleLogin, handleLogout }}>{children}</Context.Provider>
+        <Context.Provider value={{ authenticated, handleLogin, handleLogout, userAccount, setUserAccount }}>{children}</Context.Provider>
     );
 }
 

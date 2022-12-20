@@ -6,6 +6,7 @@ import { Dashboard } from "../pages/Dashboard";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { Transaction } from "../pages/Transation";
+import { Transfer } from "../pages/Transfer";
 
 
 export function Routes() {
@@ -17,6 +18,10 @@ export function Routes() {
             path: "/",
             element: <Home />,
             children: [
+                {
+                    path: "/transfer",
+                    element: <Transfer />,
+                },
                 {
                     path: "/transactions",
                     element: <Transaction />,

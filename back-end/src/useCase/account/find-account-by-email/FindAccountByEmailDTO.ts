@@ -1,3 +1,3 @@
 export interface IFindAccountByEmailDTO {
-    email: string
+    email: string,
 }
