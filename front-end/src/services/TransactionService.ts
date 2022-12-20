@@ -7,10 +7,10 @@ interface ITransferDTO {
     details: string;
 }
 
-export async function getTransactions() {
-    return await axiosInstance.get(`test`);
+export async function getTransactions(data: { accountId: string }) {
+    return await axiosInstance.get(`transfer/${data.accountId}`);
 }
 
 export async function doTransfer(data: ITransferDTO) {
-    return await axiosInstance.post(`transfer`, { ...data });
+    return await axiosInstance.post(`transfer`, data);
 }

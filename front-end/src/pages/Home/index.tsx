@@ -13,7 +13,7 @@ export function Home() {
 
     const [showMenu, setShowMenu] = React.useState(false);
     const navigate = useNavigate();
-    const { handleLogout, userAccount, setUserAccount } = useContext(Context);
+    const { handleLogout } = useContext(Context);
 
     async function handleSignOut() {
         try {

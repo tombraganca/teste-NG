@@ -12,6 +12,8 @@ export class ListTransferByIdController {
 
         const { accountId } = request.params;
 
+        console.log(request.params)
+
         const transfers = await this.listTransferByAccountIdUseCase.execute({ accountId });
 
         return response.status(200).json(transfers);

@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import { redirect } from "react-router-dom";
 import Loading from "../components/Loading";
 import { Account } from "../entities/Account";
+import { findAccountByEmail } from "../services/AccountService";
 
 import { login } from "../services/AuthService";
 import axiosInstance from "../services/AxiosInstance";
@@ -26,8 +27,15 @@ function AuthProvider({ children }: any) {
         try {
 
             const token = localStorage.getItem("token");
-            const user = JSON.parse(localStorage.getItem("user") || "");
-            setUserAccount(user);
+            if (localStorage.getItem("user")) {
+                const user = JSON.parse(localStorage.getItem("user") as string);
+                async function loadAccount() {
+                    const { data } = await findAccountByEmail({ email: user.email });
+                    const account = new Account(data);
+                    setUserAccount(account);
+                }
+                loadAccount();
+            }
 
             if (token) {
                 axiosInstance.defaults.headers.Authorization = `Bearer ${token}`;
@@ -45,6 +53,7 @@ function AuthProvider({ children }: any) {
         try {
             const { data } = await login(props);
             localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify({ ...data.user }));
             setUserAccount(data.user);
             localStorage.setItem("refreshToken", data.refreshToken);
             axiosInstance.defaults.headers.Authorization = `Bearer ${data.token}`;

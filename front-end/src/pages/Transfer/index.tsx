@@ -57,7 +57,7 @@ export function Transfer() {
             <section className="w-1/2">
                 <h1 className="text-white text-5xl font-bold mb-4" >New Transaction</h1>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="bg-zinc-800 p-8 flex flex-col justify-center text-center">
+                <form onSubmit={handleSubmit(onSubmit)} className="bg-zinc-800 p-8 flex flex-col justify-center text-center rounded-lg">
                     <input
                         className="w-full px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring-1 focus:ring-violet-500 bg-zinc-900 text-white"
                         {...register("received", {
