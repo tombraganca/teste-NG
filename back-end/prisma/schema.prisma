@@ -37,15 +37,6 @@ model Account {
   receivedAccountId Transaction[] @relation("receivedAccount")
 }
 
-// model Notification {
-//   id        String   @id
-//   createdAt DateTime @default(now())
-//   message   String
-//   read      Boolean  @default(false)
-//   Account   Account  @relation(fields: [accountId], references: [id])
-//   accountId String
-// }
-
 model Transaction {
   id                String   @id
   amount            Float
