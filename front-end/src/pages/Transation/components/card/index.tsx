@@ -9,18 +9,18 @@ interface ITransfer {
 
 export function Card(props: ITransfer) {
     return (
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 mb-4">
             <div className="flex-shrink-0">
                 {
                     props.type === 'sent' ? (
-                        <CaretDoubleUp className="w-8 h-8 rounded-full" alt="Neil image" color="white" />
+                        <CaretDoubleUp className="w-8 h-8 rounded-full" alt="Neil image" color="red" />
                     ) : (
-                        <CaretDoubleDown className="w-8 h-8 rounded-full" alt="Neil image" color="white" />
+                        <CaretDoubleDown className="w-8 h-8 rounded-full" alt="Neil image" color="green" />
                     )
                 }
             </div>
             <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-white truncate">
+                <p className="text-sm text-white truncate font-bold">
                     {props.title}
                 </p>
                 <p className="text-sm text-gray-400 truncate">
@@ -28,7 +28,7 @@ export function Card(props: ITransfer) {
                 </p>
             </div>
             <div className="inline-flex items-center text-base font-semibold text-white truncate">
-                {'$ ' + props.type === 'sent' ? '-' : '+'} {props.value}
+                {props.type === 'sent' ? '-' : '+'} {props.value}
             </div>
         </div>
     )
